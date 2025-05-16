@@ -1,13 +1,16 @@
 from fastapi import APIRouter
 
+from .create import router as create_router
+from .get import router as get_router
 from .login import router as login_router
-from .resp_pers import router as resp_pers_router
-from .root import router as root_router
-from .user import router as user_router
 
-router = APIRouter(tags=["Any Users"])
+router = APIRouter(prefix="/user", tags=["Users"])
 
+# Include login router
 router.include_router(login_router)
-router.include_router(user_router)
-router.include_router(resp_pers_router)
-router.include_router(root_router)
+
+# Include create router
+router.include_router(create_router)
+
+# Include get router
+router.include_router(get_router)

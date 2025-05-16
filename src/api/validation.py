@@ -1,18 +1,21 @@
+import time
 from typing import Annotated
 
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from jwt.exceptions import InvalidTokenError
 from sqlalchemy.ext.asyncio import AsyncSession
-import time
 
 from auth.utils import decode_jwt
 from core.config import settings
-from crud.any_user import get_any_user
-from database import db_helper
-from database.tables.user import User
+from crud import get as crud_get
+from database import User, db_helper
 
 http_bearer = HTTPBearer()
+
+
+def get_any_user(session: AsyncSession, user_id: int) -> User:
+    return crud_get(session=session, object_id=user_id, db_model=User)
 
 
 async def get_current_token_payload(
@@ -39,40 +42,17 @@ async def get_current_user_from_access_token(
     exp = token_payload.get("exp")
     if (token_type := token_payload.get(settings.auth_jwt.token_type_field)) is None:
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Bad token error"
+            status_code=status.HTTP_401_UNAUTHORIZED, detail="Bad token error"
         )
     elif token_type != settings.auth_jwt.access_token_type:
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Bad token type error"
+            status_code=status.HTTP_401_UNAUTHORIZED, detail="Bad token type error"
         )
     elif exp is not None and exp <= time.time():
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Token has expired error"
+            status_code=status.HTTP_401_UNAUTHORIZED, detail="Token has expired error"
         )
     return await get_any_user(
         any_user_id=token_payload["id"],
         session=session,
     )
-
-
-async def verify_token_user_identity(caller_user: User, roles: tuple):
-    return caller_user.role_id in roles
-
-
-async def verify_is_i(caller_user: User, user_id: int) -> bool:
-    return caller_user.id == user_id
-
-
-async def user_is_user(user: User) -> bool:
-    return settings.role.user == user.role_id
-
-
-async def user_is_resp_pers(user: User) -> bool:
-    return settings.role.resp_pers == user.role_id
-
-
-async def user_is_root(user: User) -> bool:
-    return settings.role.root == user.role_id

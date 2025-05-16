@@ -14,21 +14,11 @@ class RunConfig(BaseModel):
 class ApiPrefix(BaseModel):
     prefix: str = "/api"
     user: str = "/user"
-    resp_pers: str = "/responsible_person"
     root: str = "/root"
-
-    role: str = "/role"
-    author: str = "/author"
-    book: str = "/book"
-    book_tag: str = "/book_tag"
-    order: str = "/order"
-    tag: str = "/tag"
 
     create: str = "/create"
     get: str = "/get"
-    full_update: str = "/full_update"
-    part_update: str = "/part_update"
-    self_update: str = "/self_update"
+    update: str = "/update"
     delete: str = "/delete"
     login: str = "/login"
     update_access_token: str = "/update_access_token"
@@ -65,7 +55,6 @@ class AuthJWT(BaseModel):
     refresh_token_type: str = "refresh"
     access_token_expire_seconds: int = 10800
     refresh_token_expire_seconds: int = 2592000
-
 
 
 class Settings(BaseSettings):

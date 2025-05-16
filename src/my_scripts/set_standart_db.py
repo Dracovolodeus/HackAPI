@@ -1,4 +1,3 @@
-
 import asyncio
 from typing import Optional
 
@@ -14,9 +13,8 @@ engine = create_async_engine(DATABASE_URL, echo=False)
 async_session = sessionmaker(bind=engine, class_=AsyncSession, expire_on_commit=False)
 
 
-async def main():
-    ...
+async def main(): ...
+
 
 if __name__ == "__main__":
     asyncio.run(main())
-

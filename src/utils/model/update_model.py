@@ -3,11 +3,14 @@ from typing import TypeVar
 from pydantic import BaseModel
 from sqlalchemy.orm import DeclarativeBase
 
-from schemas.any_user import UserCreate, UserCreateForAPI
+from schemas.user import UserCreate, UserCreateForAPI
 
 # Объявляем TypeVar для разных типов моделей
 PydanticUpdate = TypeVar("PydanticUpdate", bound=BaseModel)
 DbModel = TypeVar("DbModel", bound=DeclarativeBase)
+
+
+def create_model(create_data: PydanticUpdate, db_model: DbModel): ...
 
 
 def update_model(update_data: PydanticUpdate, db_model: DbModel) -> bool:
@@ -51,7 +54,3 @@ def update_model(update_data: PydanticUpdate, db_model: DbModel) -> bool:
                 changed = True
 
     return changed
-
-
-def user_create_from_api(user: UserCreateForAPI, role_id: int) -> UserCreate:
-    return UserCreate(**user.model_dump(), role_id=role_id)

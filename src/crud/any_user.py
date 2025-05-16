@@ -5,7 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from auth.jwt import create_refresh_token
 from database.tables.user import User
-from schemas.any_user import UserCreate, UserFullUpdate, UserPartUpdate
+from schemas.user import UserCreate, UserFullUpdate, UserPartUpdate
 from utils.model import update_model
 
 
@@ -38,14 +38,14 @@ async def get_any_user(
     session: AsyncSession, any_user_id: int, role_id: Optional[int] = None
 ) -> User:
     """
-    Retrieve an user by their ID.
+    Retrieve an any_user by their ID.
     Args:
         session (AsyncSession): The asynchronous database session to use for the operation.
-        any_user_id (int): The ID of the user to retrieve.
+        any_user_id (int): The ID of the any_user to retrieve.
     Returns:
-        User: The user instance if found.
+        User: The any_user instance if found.
     Raises:
-        NotFoundError: If no user with the specified ID exists in the database.
+        NotFoundError: If no any_user with the specified ID exists in the database.
     """
     any_user = await session.get(User, any_user_id)
     if any_user is None:
@@ -72,7 +72,7 @@ async def update_any_user(
         User: The updated any_user instance.
 
     Raises:
-        NotFoundError: If the user to be updated does not exist.
+        NotFoundError: If the any_user to be updated does not exist.
         NotChangedError: If no changes are detected in the provided update data.
     """
 
@@ -109,7 +109,7 @@ async def delete_any_user(
     Raises:
         NotFoundError: If no any_user with the specified ID exists in the database.
     """
-    # Get the user
+    # Get the any_user
     any_user = await get_any_user(
         session=session, any_user_id=any_user_id, role_id=role_id
     )

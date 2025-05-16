@@ -1,6 +1,6 @@
 import os
 
-cur_dir = "."#os.path.dirname(__file__)
+cur_dir = "."  # os.path.dirname(__file__)
 ways = [cur_dir]
 total = 0
 without_spaces = 0
@@ -26,20 +26,16 @@ while ways:
             comment_now = False
             for line in r.readlines():
                 l = line.strip()
-                if l.startswith('class'):
+                if l.startswith("class"):
                     classes += 1
-                if l.startswith('def'):
+                if l.startswith("def"):
                     defs += 1
                 if not comment_now and l.startswith('"""'):
                     comment_now = True
                 elif comment_now and l.endswith('"""'):
                     comment_now = False
                     without_spaces -= 1
-                if (
-                    l
-                    and not l.startswith("#")
-                    and not comment_now
-                ):
+                if l and not l.startswith("#") and not comment_now:
                     without_spaces += 1
                     if not (l.startswith("import") or l.startswith("from")):
                         without_spaces_and_imports += 1
@@ -51,9 +47,9 @@ while ways:
 
 print(f"Всего .py файлов: {py_files}")
 print(f"Из них не __init__.py файлов: {not_init_py_files}")
-print(f'Всего классов: {classes}')
-print(f'Всего методов и функций: {defs}')
+print(f"Всего классов: {classes}")
+print(f"Всего методов и функций: {defs}")
 print()
-print(f'Непустые строки кода: {without_spaces}')
+print(f"Непустые строки кода: {without_spaces}")
 print(f"Непустые строки кода (без импортов): {without_spaces_and_imports}")
 print(f"Всего строк кода: {total}")
