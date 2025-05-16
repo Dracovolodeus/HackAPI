@@ -26,6 +26,7 @@ async def create_user(
     user_create: UserCreate,
 ):
     try:
-        user = crud_create(create=user_create, db_model=User, session=session)
+        user = await crud_create(create=user_create, db_model=User, session=session)
     except IntegrityError:
         HTTPException(status_code=status.HTTP_409_CONFLICT, detail="The email is busy")
+    return user

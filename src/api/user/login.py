@@ -10,7 +10,7 @@ from crud.login import login as crud_login
 from database import db_helper
 from schemas.token import AccessToken
 from schemas.user import UserLogin
-from src.api.validation import get_current_token_payload
+from api.validation import get_current_token_payload
 
 router = APIRouter()
 

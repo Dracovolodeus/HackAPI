@@ -10,9 +10,7 @@ class UserBase(BaseModel):
     last_name: str
     second_name: str
     email: str
-    telegram_id: int
     password: str
-    phone: str
 
 
 class UserCreate(UserBase):
@@ -22,26 +20,18 @@ class UserCreate(UserBase):
         return hash_password(v)
 
 
-class UserCreateForAPI(UserBase): ...
-
-
 class UserRead(UserBase):
     id: int
-    role_id: int
-    refresh_token: str
+    refresh_token: str | None
 
 
 class UserFullUpdate(BaseModel):
     id: int
-    new_id: Optional[int] = None
     first_name: Optional[str] = None
     last_name: Optional[str] = None
     second_name: Optional[str] = None
     email: Optional[str] = None
-    telegram_id: Optional[int] = None
     password: Optional[str] = None
-    phone: Optional[str] = None
-    role_id: Optional[int] = None
 
 
 class UserPartUpdate(BaseModel):
@@ -51,7 +41,6 @@ class UserPartUpdate(BaseModel):
     second_name: Optional[str] = None
     email: Optional[str] = None
     password: Optional[str] = None
-    phone: Optional[str] = None
 
 
 class UserSelfUpdate(BaseModel):
@@ -60,7 +49,6 @@ class UserSelfUpdate(BaseModel):
     second_name: Optional[str] = None
     email: Optional[str] = None
     password: Optional[str] = None
-    phone: Optional[str] = None
 
 
 class UserLogin(BaseModel):

@@ -14,4 +14,4 @@ class User(Base, IntIdPkMixin):
 
     email: Mapped[str] = mapped_column(unique=True)
     password: Mapped[str]
-    refresh_token: Mapped[str | None] = mapped_column(nullable=True)
+    refresh_token: Mapped[str | None] = mapped_column(nullable=True, default=None)
