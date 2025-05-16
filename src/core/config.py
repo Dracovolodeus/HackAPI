@@ -14,7 +14,7 @@ class RunConfig(BaseModel):
 class ApiPrefix(BaseModel):
     prefix: str = "/api"
     user: str = "/user"
-    root: str = "/root"
+    hackathon: str = "/hackathon"
 
     create: str = "/create"
     get: str = "/get"

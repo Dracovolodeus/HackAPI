@@ -3,8 +3,6 @@ from typing import TypeVar
 from pydantic import BaseModel
 from sqlalchemy.orm import DeclarativeBase
 
-from schemas.user import UserCreate, UserCreateForAPI
-
 # Объявляем TypeVar для разных типов моделей
 PydanticUpdate = TypeVar("PydanticUpdate", bound=BaseModel)
 DbModel = TypeVar("DbModel", bound=DeclarativeBase)

@@ -1,3 +1,4 @@
-__all__ = ("User",)
+__all__ = ("User", "Hackathon")
 
 from .user import User
+from .hackathon import Hackathon

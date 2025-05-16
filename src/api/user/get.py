@@ -1,13 +1,9 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.ext.asyncio import AsyncSession
+from fastapi import APIRouter, Depends, status
 
 from core.config import settings
-from crud import get as crud_get
-from database import User, db_helper
-from schemas.user import UserCreate, UserRead
-
+from database import User
 from ..validation import get_current_user_from_access_token
 
 router = APIRouter()
