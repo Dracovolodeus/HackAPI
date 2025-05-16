@@ -35,7 +35,6 @@ async def login(
         session=session,
         email=user_login.email,
         password=user_login.password,
-        telegram_id=user_login.telegram_id,
     )
 
 
@@ -53,14 +52,17 @@ async def update_access_token(
 ):
     exp = token_payload.get("exp")
     if (token_type := token_payload.get(settings.auth_jwt.token_type_field)) is None:
+        print(f"\n1\n")
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED, detail="Bad token error"
         )
     elif token_type != settings.auth_jwt.refresh_token_type:
+        print(f"\n2\n")
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED, detail="Bad token type error"
         )
     elif exp is not None and exp <= time.time():
+        print(f"\n3\n")
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED, detail="Token has expired error"
         )

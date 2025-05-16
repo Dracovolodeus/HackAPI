@@ -26,6 +26,7 @@ class HackathonCreateForAPI(BaseModel):
     organization_name: str
     contacts: str
     description: str
+    detail: list[dict[str, str]]
     plan: str
     hackathon_name: str
     old_limitation: int
@@ -41,6 +42,6 @@ class HackathonCreateForAPI(BaseModel):
 
 class HackathonRead(HackathonBase):
     id: int
-    admins_ids: list
-    jury_ids: list
-    teams_ids: list
+    admins_ids: list[int]
+    jury_ids: list[int]
+    teams_ids: list[int]

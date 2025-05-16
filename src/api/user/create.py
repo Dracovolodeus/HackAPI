@@ -13,7 +13,7 @@ router = APIRouter()
 
 
 @router.post(
-    f"{settings.api.user}{settings.api.create}",
+    f"{settings.api.create}",
     status_code=status.HTTP_201_CREATED,
     response_model=UserRead,
     responses={201: {"description": "User created"}},
@@ -28,5 +28,5 @@ async def create_user(
     try:
         user = await crud_create(create=user_create, db_model=User, session=session)
     except IntegrityError:
-        HTTPException(status_code=status.HTTP_409_CONFLICT, detail="The email is busy")
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="The email is busy")
     return user

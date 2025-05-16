@@ -7,20 +7,27 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 class RunConfig(BaseModel):
-    host: str = "127.0.0.1"
+    host: str = "0.0.0.0"
     port: int = 8000
+    url: str = f"https://45.143.203.44:10000/{host}:{port}"
 
 
 class ApiPrefix(BaseModel):
     prefix: str = "/api"
     user: str = "/user"
     hackathon: str = "/hackathon"
+    team: str = "/team"
+    jury: str = "/jury"
+    admin: str = "/admin"
 
     create: str = "/create"
     get: str = "/get"
     update: str = "/update"
     delete: str = "/delete"
     login: str = "/login"
+    add: str = "/add"
+    remove: str = "/remove"
+    invite: str = "/invite"
     update_access_token: str = "/update_access_token"
 
 
@@ -53,7 +60,7 @@ class AuthJWT(BaseModel):
     token_type_field: str = "type"
     access_token_type: str = "access"
     refresh_token_type: str = "refresh"
-    access_token_expire_seconds: int = 10800
+    access_token_expire_seconds: int = 864000
     refresh_token_expire_seconds: int = 2592000
 
 

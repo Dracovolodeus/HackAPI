@@ -10,7 +10,10 @@ class User(Base, IntIdPkMixin):
     first_name: Mapped[str]
     last_name: Mapped[str]
     second_name: Mapped[str]
+    birthday: Mapped[str]
 
     email: Mapped[str] = mapped_column(unique=True)
     password: Mapped[str]
     refresh_token: Mapped[str | None] = mapped_column(nullable=True, default=None)
+
+    description: Mapped[str]

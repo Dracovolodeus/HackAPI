@@ -1,5 +1,7 @@
 from sqlalchemy import ForeignKey, Integer
 from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.dialects.postgresql import JSONB
+from sqlalchemy.ext.mutable import MutableList
 
 from ..base import Base
 from ..mixins.int_id_pk import IntIdPkMixin
@@ -11,6 +13,11 @@ class Hackathon(Base, IntIdPkMixin):
     organization_name: Mapped[str]
     contacts: Mapped[str]
     description: Mapped[str]
+    detail: Mapped[list[dict[str, str]]] = mapped_column(
+        MutableList.as_mutable(JSONB),
+        default=lambda: [],
+        nullable=False,
+    )
     plan: Mapped[str]
     hackathon_name: Mapped[str]
     old_limitation: Mapped[int]
@@ -23,6 +30,12 @@ class Hackathon(Base, IntIdPkMixin):
     start_date: Mapped[str]
     end_date: Mapped[str]
 
-    admins_ids: Mapped[list[int]] = mapped_column(ARRAY(Integer))
-    jury_ids: Mapped[list[int]] = mapped_column(ARRAY(Integer))
-    teams_ids: Mapped[list[int]] = mapped_column(ARRAY(Integer))
+    admins_ids: Mapped[list[int]] = mapped_column(MutableList.as_mutable(ARRAY(Integer)), default=lambda: [],
+                                                  nullable=False,
+                                                  )
+    jury_ids: Mapped[list[int]] = mapped_column(MutableList.as_mutable(ARRAY(Integer)), default=lambda: [],
+                                                nullable=False,
+                                                )
+    teams_ids: Mapped[list[int]] = mapped_column(MutableList.as_mutable(ARRAY(Integer)), default=lambda: [],
+                                                 nullable=False,
+                                                 )

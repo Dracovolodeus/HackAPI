@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from core.config import settings
 from crud import get as crud_get
-from database import Hackathon, db_helper, User
+from database import Hackathon, db_helper
 from schemas.hackathon import HackathonRead
 from exceptions.any import NotFoundError
 
@@ -11,7 +11,7 @@ router = APIRouter()
 
 
 @router.get(
-    f"{settings.api.hackathon}{settings.api.create}",
+    f"{settings.api.get}",
     status_code=status.HTTP_200_OK,
     response_model=HackathonRead,
     responses={

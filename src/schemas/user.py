@@ -11,6 +11,8 @@ class UserBase(BaseModel):
     second_name: str
     email: str
     password: str
+    description: str
+    birthday: str
 
 
 class UserCreate(UserBase):
@@ -54,4 +56,3 @@ class UserSelfUpdate(BaseModel):
 class UserLogin(BaseModel):
     email: Optional[str] = None
     password: Optional[str] = None
-    telegram_id: Optional[int] = None
