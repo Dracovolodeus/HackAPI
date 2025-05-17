@@ -13,6 +13,7 @@ class UserBase(BaseModel):
     password: str
     description: str
     birthday: str
+    is_search: bool = False
 
 
 class UserCreate(UserBase):
@@ -24,34 +25,17 @@ class UserCreate(UserBase):
 
 class UserRead(UserBase):
     id: int
+    description: str | None
     refresh_token: str | None
 
 
-class UserFullUpdate(BaseModel):
+class UserPartRead(BaseModel):
     id: int
-    first_name: Optional[str] = None
-    last_name: Optional[str] = None
-    second_name: Optional[str] = None
-    email: Optional[str] = None
-    password: Optional[str] = None
-
-
-class UserPartUpdate(BaseModel):
-    id: int
-    first_name: Optional[str] = None
-    last_name: Optional[str] = None
-    second_name: Optional[str] = None
-    email: Optional[str] = None
-    password: Optional[str] = None
-
-
-class UserSelfUpdate(BaseModel):
-    first_name: Optional[str] = None
-    last_name: Optional[str] = None
-    second_name: Optional[str] = None
-    email: Optional[str] = None
-    password: Optional[str] = None
-
+    first_name: str
+    last_name: str
+    second_name: str
+    description: str | None
+    email: str
 
 class UserLogin(BaseModel):
     email: Optional[str] = None

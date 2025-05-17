@@ -5,6 +5,7 @@ from fastapi import APIRouter, Depends, status
 from core.config import settings
 from database import User
 from schemas.user import UserRead
+
 from ..validation import get_current_user_from_access_token
 
 router = APIRouter()

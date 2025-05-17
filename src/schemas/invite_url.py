@@ -1,19 +1,9 @@
-from pydantic import BaseModel, field_validator
-import datetime
+from pydantic import BaseModel
 
 
-class InviteURLBase(BaseModel):
+class InviteURLCreate(BaseModel):
+    team_id: int
+
+
+class InviteURLRead(BaseModel):
     url: str
-
-
-class InviteURLCreate(InviteURLBase):
-    creator_id: int
-
-    @field_validator("url", mode="before")
-    def gen_url(cls, v):
-        now = datetime.datetime.now()
-        return f"{v}"
-
-
-class InviteURLRead(InviteURLBase):
-    ...

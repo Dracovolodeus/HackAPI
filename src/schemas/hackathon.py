@@ -1,3 +1,5 @@
+from typing import Optional
+
 from pydantic import BaseModel
 
 
@@ -6,10 +8,12 @@ class HackathonBase(BaseModel):
     organization_name: str
     contacts: str
     description: str
-    plan: str
     hackathon_name: str
-    old_limitation: int
-    email_text: str
+    city: str
+    address: str
+    is_offline: bool
+    image_id: Optional[int] = None
+    detail: list[dict[str, str]]
 
     reg_start_date: str
     reg_end_date: str
@@ -27,10 +31,11 @@ class HackathonCreateForAPI(BaseModel):
     contacts: str
     description: str
     detail: list[dict[str, str]]
-    plan: str
     hackathon_name: str
-    old_limitation: int
-    email_text: str
+    city: str
+    address: str
+    is_offline: bool
+    image_id: Optional[int]
 
     reg_start_date: str
     reg_end_date: str

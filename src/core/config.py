@@ -22,19 +22,25 @@ class ApiPrefix(BaseModel):
 
     create: str = "/create"
     get: str = "/get"
+    get_all: str = "/get_all"
+    get_all_searches: str = "/get_all_searches"
     update: str = "/update"
     delete: str = "/delete"
     login: str = "/login"
     add: str = "/add"
     remove: str = "/remove"
     invite: str = "/invite"
+    uninvite: str = "/uninvite"
+    set_is_search: str = "/set_is_search"
+    self: str = "/self"
+    image: str = "/image"
+    upload: str = "/upload"
+    check_users_want_join_to_team: str = "/check_users_want_join_to_team"
+    description: str = "/description"
+    want_the_user: str = "/want_the_user"
+    want_the_team: str = "/want_the_team"
+    set_is_activ: str = "/set_is_activ"
     update_access_token: str = "/update_access_token"
-
-
-class RoleId(BaseModel):
-    user: int = 1
-    resp_pers: int = 2
-    root: int = 3
 
 
 class DatabaseConfig(BaseModel):
@@ -60,8 +66,10 @@ class AuthJWT(BaseModel):
     token_type_field: str = "type"
     access_token_type: str = "access"
     refresh_token_type: str = "refresh"
+    url_token_type: str = "url"
     access_token_expire_seconds: int = 864000
     refresh_token_expire_seconds: int = 2592000
+    invite_url_expire_seconds: int = 10800
 
 
 class Settings(BaseSettings):
@@ -75,7 +83,6 @@ class Settings(BaseSettings):
     api: ApiPrefix = ApiPrefix()
     db: DatabaseConfig
     auth_jwt: AuthJWT = AuthJWT()
-    role: RoleId = RoleId()
 
 
 settings = Settings()

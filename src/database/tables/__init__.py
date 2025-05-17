@@ -1,5 +1,6 @@
-__all__ = ("User", "Hackathon", "Team")
+__all__ = ("User", "Hackathon", "Team", "Image")
 
-from .user import User
-from .team import Team
 from .hackathon import Hackathon
+from .image import Image
+from .team import Team
+from .user import User

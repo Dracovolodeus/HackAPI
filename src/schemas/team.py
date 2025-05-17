@@ -18,4 +18,10 @@ class TeamCreateForAPI(BaseModel):
     idea_detail: str
     hackathon_id: int
 
+
 class TeamRead(TeamBase): ...
+
+
+class TeamAndURL(BaseModel):
+    read: TeamRead
+    url: str
